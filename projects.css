@@ -43,12 +43,6 @@
   border-top: 6px solid var(--primary-color);
   border-right: 6px solid var(--primary-color);
 }
-.projects_body .card .face.face2::after {
-  bottom: -18px;
-  left: -20px;
-  border-bottom: 6px solid var(--primary-color);
-  border-left: 6px solid var(--primary-color);
-}
 .projects_body .card .face.face1 .content img {
   object-fit: cover;
   width: 100%;
@@ -85,6 +79,12 @@
   transform: translateY(0);
   border-top-right-radius: 0;
   border-top-left-radius: 0;
+}
+.projects_body .card .face.face2::after {
+  bottom: -18px;
+  left: -20px;
+  border-bottom: 6px solid var(--primary-color);
+  border-left: 6px solid var(--primary-color);
 }
 .projects_body .card .face.face2 .content {
   padding: 5px 0;

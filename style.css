@@ -16,6 +16,10 @@
 html {
   scroll-behavior: smooth;
 }
+a {
+  text-decoration: none;
+  color: unset;
+}
 body {
   height: 2000px;
   background: #1f242d;
@@ -37,17 +41,6 @@ header {
   top: 60%;
   animation: flashMoveTop 2s ease infinite;
 }
-
-@keyframes flashMoveTop {
-  0%,
-  100% {
-    top: 70%;
-  }
-  50% {
-    top: 50%;
-  }
-}
-
 .logo {
   position: relative;
 }
@@ -118,8 +111,9 @@ nav .nav-item.active::before {
 }
 nav .nav-item:hover,
 nav .active {
-  color: #0ef;
+  color: var(--primary-color);
 }
+
 #home,
 #about,
 #skills,
@@ -134,10 +128,6 @@ nav .active {
 }
 
 /* subnav */
-a {
-  text-decoration: none;
-  color: unset;
-}
 .navigation {
   height: var(--width);
   display: flex;
@@ -146,12 +136,13 @@ a {
   border-radius: 10px;
   background-color: #2f2f2f;
   position: fixed;
-  bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
   pointer-events: none;
   transition: 0.3s;
+  animation-delay: 0.5s;
+  animation: slideTop ease 1s forwards;
   z-index: 100;
 }
 .navigation ul {
@@ -257,6 +248,26 @@ a {
     opacity: 1;
   }
 }
+@keyframes slideTop {
+  0% {
+    top: 100%;
+    opacity: 0;
+  }
+  100% {
+    top: 86%;
+    opacity: 1;
+    pointer-events: unset;
+  }
+}
+@keyframes flashMoveTop {
+  0%,
+  100% {
+    top: 70%;
+  }
+  50% {
+    top: 50%;
+  }
+}
 @keyframes opacity {
   0% {
     opacity: 0;
@@ -289,12 +300,6 @@ a {
   }
 }
 @media screen and (max-width: 1023px) {
-  header {
-    justify-content: center;
-  }
-  nav {
-    display: none;
-  }
   #home,
   #about,
   #skills,
@@ -306,24 +311,17 @@ a {
   #home {
     margin-top: 0;
   }
-  .flash-icon {
-    display: none;
-  }
-}
-@media screen and (max-width: 736px) {
   header {
     justify-content: center;
   }
   nav {
     display: none;
   }
-  #home,
-  #about,
-  #skills,
-  #projects,
-  #contact {
-    height: auto;
+  .flash-icon {
+    display: none;
   }
+}
+@media screen and (max-width: 736px) {
   .navigation {
     opacity: 1;
   }

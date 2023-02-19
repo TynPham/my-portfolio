@@ -15,16 +15,6 @@
   left: 20%;
   animation: flashMoveRight 3s ease infinite;
 }
-
-@keyframes flashMoveRight {
-  0%,
-  100% {
-    left: 30%;
-  }
-  50% {
-    left: 10%;
-  }
-}
 .home_image {
   position: relative;
   animation: move 1.5s ease-in-out infinite;
@@ -90,15 +80,6 @@
 .home_content .work span::before {
   animation: appear_text 4s infinite;
 }
-@keyframes appear_text {
-  40%,
-  60% {
-    left: 100%;
-  }
-  100% {
-    left: 0;
-  }
-}
 .home_content .description {
   text-transform: capitalize;
   margin-top: 1.5rem;
@@ -123,6 +104,25 @@
 
 /* home */
 
+@keyframes appear_text {
+  40%,
+  60% {
+    left: 100%;
+  }
+  100% {
+    left: 0;
+  }
+}
+@keyframes flashMoveRight {
+  0%,
+  100% {
+    left: 30%;
+  }
+  50% {
+    left: 10%;
+  }
+}
+
 @media screen and (max-width: 1023px) {
   #home {
     grid-template-columns: repeat(1, 1fr);
@@ -144,10 +144,10 @@
   }
 }
 @media screen and (max-width: 736px) {
-  .home_content .work span {
-    display: block;
-  }
   .home_image img {
     width: 18rem;
+  }
+  .home_content .work span {
+    display: block;
   }
 }
