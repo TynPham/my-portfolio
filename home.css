@@ -115,4 +115,22 @@
   .home_content {
     text-align: center;
   }
+  .home_image {
+    margin-top: 4rem;
+  }
+  .home_image {
+    animation: unset;
+  }
+  .home_content .name span::before,
+  .home_content .work span::before {
+    content: none;
+  }
+}
+@media screen and (max-width: 736px) {
+  .home_content .work span {
+    display: block;
+  }
+  .home_image img {
+    width: 18rem;
+  }
 }

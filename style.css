@@ -2,6 +2,9 @@
 
 :root {
   --primary-color: #0ef;
+  --width-small: 60px;
+  --width: 80px;
+  --width-large: 100px;
 }
 
 * {
@@ -116,7 +119,7 @@ a {
   color: unset;
 }
 .navigation {
-  height: 80px;
+  height: var(--width);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,8 +139,8 @@ a {
   display: flex;
 }
 .navigation ul li {
-  width: 100px;
-  height: 80px;
+  width: var(--width-large);
+  height: var(--width);
 }
 .navigation ul li a {
   position: relative;
@@ -178,8 +181,8 @@ a {
 }
 .bar {
   position: absolute;
-  width: 100px;
-  height: 80px;
+  width: var(--width-large);
+  height: var(--width);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -196,16 +199,16 @@ a {
   border-radius: 8px;
 }
 .navigation ul li:nth-child(2).active ~ .bar {
-  transform: translateX(100px);
+  transform: translateX(var(--width-large));
 }
 .navigation ul li:nth-child(3).active ~ .bar {
-  transform: translateX(calc(100px * 2));
+  transform: translateX(calc(var(--width-large) * 2));
 }
 .navigation ul li:nth-child(4).active ~ .bar {
-  transform: translateX(calc(100px * 3));
+  transform: translateX(calc(var(--width-large) * 3));
 }
 .navigation ul li:nth-child(5).active ~ .bar {
-  transform: translateX(calc(100px * 4));
+  transform: translateX(calc(var(--width-large) * 4));
 }
 .appear {
   opacity: 1;
@@ -261,5 +264,60 @@ a {
   }
   50% {
     margin-bottom: -5px;
+  }
+}
+@media screen and (max-width: 1023px) {
+  header {
+    justify-content: center;
+  }
+  nav {
+    display: none;
+  }
+  #home,
+  #about,
+  #skills,
+  #projects,
+  #contact {
+    height: auto;
+  }
+}
+@media screen and (max-width: 736px) {
+  header {
+    justify-content: center;
+  }
+  nav {
+    display: none;
+  }
+  #home,
+  #about,
+  #skills,
+  #projects,
+  #contact {
+    height: auto;
+  }
+  .navigation ul li {
+    width: var(--width-small);
+    height: var(--width);
+  }
+  .navigation ul li a .icon {
+    font-size: 1.5em;
+  }
+  .bar {
+    width: var(--width-small);
+  }
+  .navigation ul li:nth-child(2).active ~ .bar {
+    transform: translateX(var(--width-small));
+  }
+  .navigation ul li:nth-child(3).active ~ .bar {
+    transform: translateX(calc(var(--width-small) * 2));
+  }
+  .navigation ul li:nth-child(4).active ~ .bar {
+    transform: translateX(calc(var(--width-small) * 3));
+  }
+  .navigation ul li:nth-child(5).active ~ .bar {
+    transform: translateX(calc(var(--width-small) * 4));
+  }
+  .navigation ul li a .text {
+    font-size: 0.5em;
   }
 }

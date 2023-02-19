@@ -110,7 +110,6 @@
 @media screen and (max-width: 1023px) {
   #contact {
     height: 60vh;
-    margin-top: 32rem;
   }
   .contact_container {
     width: 100%;
@@ -122,9 +121,13 @@
   }
 }
 @media screen and (max-width: 736px) {
+  #contact {
+    padding: 0 1rem;
+  }
   .contact_container {
-    margin: 40px 0;
-    height: 100%;
+    padding: 20px;
+    height: max-content;
+    text-align: center;
   }
   .contact_container .content {
     flex-direction: column-reverse;

@@ -105,3 +105,11 @@
     place-items: center;
   }
 }
+@media screen and (max-width: 1023px) {
+  .projects_body {
+    padding: 0;
+  }
+  .projects_body .card .face {
+    width: 300px;
+  }
+}
