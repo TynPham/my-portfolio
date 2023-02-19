@@ -8,32 +8,31 @@ const navSkills = document.querySelectorAll(".skills");
 const navProjects = document.querySelectorAll(".projects");
 const navContact = document.querySelectorAll(".contact");
 
-const POINT = window.innerHeight - 100;
+const Home = document.querySelector("#home");
+const About = document.querySelector("#about");
+const Skills = document.querySelector("#skills");
+const Projects = document.querySelector("#projects");
 
-function handleClick(list, currentItem) {
-  list.forEach((item) => {
-    item.classList.remove("active");
-    currentItem.classList.add("active");
-  });
-}
+const rangeHome = Home.offsetHeight - 100;
+const rangAbout = rangeHome + About.offsetHeight - 100;
+const rangSkills = rangAbout + Skills.offsetHeight - 100;
+const rangeProjects = rangSkills + Projects.offsetHeight - 300;
 
 function handleScroll() {
   const rangeTop = header.getBoundingClientRect().top * -1;
-  if (rangeTop <= POINT * 0) {
+  if (rangeTop < rangeHome) {
     addActive(navHome);
-  } else if (rangeTop < POINT * 1) {
-    addActive(navHome);
-  } else if (rangeTop < POINT * 2) {
+  } else if (rangeTop < rangAbout) {
     addActive(navAbout);
-  } else if (rangeTop < POINT * 3) {
+  } else if (rangeTop < rangSkills) {
     addActive(navSkills);
-  } else if (rangeTop < POINT * 4) {
+  } else if (rangeTop < rangeProjects) {
     addActive(navProjects);
   } else {
     addActive(navContact);
   }
 
-  if (rangeTop >= POINT) {
+  if (rangeTop >= rangeHome) {
     subNav.classList.add("appear");
   } else {
     subNav.classList.remove("appear");
@@ -54,12 +53,13 @@ function addActive(list) {
   });
 }
 
-// navItem.forEach((item) => {
-//   item.addEventListener("click", () => handleClick(navItem, item));
-// });
-
-// listUl.forEach((item) => {
-//   item.addEventListener("click", () => handleClick(listUl, item));
-// });
-
 window.addEventListener("scroll", handleScroll);
+
+// text typing
+
+var typed = new Typed(".auto-type", {
+  strings: ["Pham Tuyen"],
+  typeSpeed: 150,
+  backSpeed: 150,
+  loop: true,
+});

@@ -7,7 +7,32 @@
   color: #fff;
   letter-spacing: 2px;
   text-shadow: 0 0 20px #fff;
+  position: relative;
+  width: max-content;
+  margin: auto;
 }
+#skills .skills_title::before,
+#skills h2::before,
+#projects .projects_title::before,
+.about_body-text h1::before,
+.about_body-text h3::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -1rem;
+  width: 50%;
+  height: 4px;
+  background: var(--primary-color);
+}
+.about_body-text h1::before,
+.about_body-text h3::before {
+  bottom: -4px;
+}
+#skills h2::before {
+  left: unset;
+  right: 0;
+}
+
 #skills a {
   display: block;
   width: max-content;

@@ -6,12 +6,31 @@
   padding-top: 5rem;
   place-items: center;
 }
+#home .flash-icon {
+  position: absolute;
+  width: 5rem;
+  rotate: 30deg;
+  animation: unset;
+  top: 82%;
+  left: 20%;
+  animation: flashMoveRight 3s ease infinite;
+}
+
+@keyframes flashMoveRight {
+  0%,
+  100% {
+    left: 30%;
+  }
+  50% {
+    left: 10%;
+  }
+}
 .home_image {
   position: relative;
   animation: move 1.5s ease-in-out infinite;
 }
 .home_image img {
-  width: 24rem;
+  width: 30rem;
   animation: slideLeft 0.7s ease-out forwards;
 }
 .home_image::before,
@@ -57,7 +76,6 @@
   text-transform: uppercase;
   position: relative;
 }
-.home_content .name span::before,
 .home_content .work span::before {
   position: absolute;
   content: "";
@@ -109,7 +127,7 @@
   #home {
     grid-template-columns: repeat(1, 1fr);
     padding: 0 3rem;
-    padding-top: 14rem;
+    padding-top: 10rem;
     place-items: start center;
   }
   .home_content {
@@ -121,7 +139,6 @@
   .home_image {
     animation: unset;
   }
-  .home_content .name span::before,
   .home_content .work span::before {
     content: none;
   }

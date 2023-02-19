@@ -2,7 +2,7 @@
 
 :root {
   --primary-color: #0ef;
-  --width-small: 60px;
+  --width-small: 70px;
   --width: 80px;
   --width-large: 100px;
 }
@@ -19,6 +19,7 @@ html {
 body {
   height: 2000px;
   background: #1f242d;
+  overflow-x: hidden;
 }
 header {
   position: absolute;
@@ -28,6 +29,25 @@ header {
   justify-content: space-between;
   padding: 2rem 3rem;
 }
+.flash-icon {
+  position: absolute;
+  width: 5rem;
+  rotate: 30deg;
+  left: 35%;
+  top: 60%;
+  animation: flashMoveTop 2s ease infinite;
+}
+
+@keyframes flashMoveTop {
+  0%,
+  100% {
+    top: 70%;
+  }
+  50% {
+    top: 50%;
+  }
+}
+
 .logo {
   position: relative;
 }
@@ -64,7 +84,7 @@ header {
 }
 nav {
   display: flex;
-  gap: 3rem;
+  gap: 4rem;
   margin-bottom: 1rem;
 }
 nav a {
@@ -130,6 +150,7 @@ a {
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
+  pointer-events: none;
   transition: 0.3s;
   z-index: 100;
 }
@@ -212,6 +233,7 @@ a {
 }
 .appear {
   opacity: 1;
+  pointer-events: unset;
 }
 /* subNav */
 
@@ -279,6 +301,13 @@ a {
   #projects,
   #contact {
     height: auto;
+    margin-top: 6rem;
+  }
+  #home {
+    margin-top: 0;
+  }
+  .flash-icon {
+    display: none;
   }
 }
 @media screen and (max-width: 736px) {
@@ -294,6 +323,9 @@ a {
   #projects,
   #contact {
     height: auto;
+  }
+  .navigation {
+    opacity: 1;
   }
   .navigation ul li {
     width: var(--width-small);
