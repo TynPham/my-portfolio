@@ -22,6 +22,35 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Build successfully after build
+        if: success()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ✅ Build successfully after build
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+      - name: Build failed after build
+        if: failure()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ❌ Build failed after build
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -43,3 +72,31 @@ jobs:
             npm i --force
             npm run build
             pm2 restart my-portfolio
+      - name: Deploy successfully after deploy
+        if: success()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ✅ Deploy successfully after deploy
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+      - name: Deploy failed after deploy
+        if: failure()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ❌ Deploy failed after deploy
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
