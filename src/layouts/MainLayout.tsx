@@ -1,4 +1,3 @@
-import { FiFacebook, FiGithub, FiInstagram, FiLinkedin, FiTwitter } from 'react-icons/fi'
 import Header from './components/header/Header'
 import SideElement from './components/side-element/SideElement'
 import BgTracking from 'src/components/bg-tracking/BgTracking'
@@ -8,7 +7,7 @@ import Loader from './components/init-loader/Loader'
 import { Link, useLocation } from 'react-router-dom'
 import AppProvider from 'src/contexts/app.context'
 import MenuMobile from './components/menu-mobile/MenuMobile'
-import { socialLinks } from 'src/data/common.dummy'
+import { socialLinks } from 'src/data/common'
 import ElementEffect from 'src/components/effect/ElementEffect'
 import 'preline/preline'
 import { IStaticMethods } from 'preline/preline'
@@ -46,7 +45,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
                 return (
                   <ElementEffect
                     key={itemIdx}
-                    motionProps={{
+                    animationProps={{
                       initial: { opacity: 1 },
                       whileHover: { y: -5, color: '#64ffda' }
                     }}
@@ -61,12 +60,12 @@ export default function MainLayout({ children }: MainLayoutProps) {
           </SideElement>
           <SideElement containerClass='right-10 left-auto gap-4'>
             <ElementEffect
-              elementType='div'
-              motionProps={{
+              ElementType='div'
+              animationProps={{
                 initial: { opacity: 1 },
                 whileHover: { y: -5, color: '#64ffda' }
               }}
-              elementClass='[writing-mode:vertical-lr] text-sm tracking-widest cursor-pointer'
+              className='[writing-mode:vertical-lr] text-sm tracking-widest cursor-pointer'
             >
               <Link to='mailto:tuyenpham1104.dev@.com'>tuyenpham1104.dev@gmail.com</Link>
             </ElementEffect>

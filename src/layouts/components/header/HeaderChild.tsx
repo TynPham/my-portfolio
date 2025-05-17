@@ -3,17 +3,20 @@ import { HashLink } from 'react-router-hash-link'
 import BurgerMenu from 'src/components/burger-bar/BurgerBar'
 import ElementEffect from 'src/components/effect/ElementEffect'
 import { INIT_EFFECT_DURATION } from 'src/constants/common'
-import { headerNavDummy } from 'src/data/common.dummy'
+import { headerNavDummy } from 'src/data/common'
 
 const HeaderChild = memo(function HeaderChildInner() {
   return (
     <Fragment>
       <ElementEffect
-        motionProps={{
-          transition: { delay: INIT_EFFECT_DURATION }
+        animationProps={{
+          transition: { delay: INIT_EFFECT_DURATION },
+          initial: { opacity: 0 },
+          animate: { opacity: 1 }
         }}
-        elementType={'h2'}
-        elementClass='text-2xl italic text-main_green'
+        ElementType={'h2'}
+        className='text-2xl italic text-main_green'
+        forceAnimate={true}
       >
         Tyn Pham
       </ElementEffect>
@@ -21,13 +24,14 @@ const HeaderChild = memo(function HeaderChildInner() {
         {headerNavDummy.map((nav, index) => (
           <ElementEffect
             key={nav.id}
-            motionProps={{
-              initial: { y: '-100%' },
-              animate: { y: 0 },
+            animationProps={{
+              initial: { y: '-100%', opacity: 0 },
+              animate: { y: 0, opacity: 1 },
               transition: { delay: INIT_EFFECT_DURATION + index * 0.1 }
             }}
-            elementClass='cursor-pointer hover:text-main_green transition-all'
-            elementType={'li'}
+            className='cursor-pointer hover:text-main_green transition-all'
+            ElementType={'li'}
+            forceAnimate={true}
           >
             <HashLink smooth to={nav.href} className='flex items-center gap-4'>
               <span className='text-main_green'>0{nav.id}</span>

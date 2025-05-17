@@ -16,7 +16,7 @@ export interface ContactFormProps {
 export default function ContactForm({ handleClose, containerClass, isShowAboutContact }: ContactFormProps) {
   return (
     <ElementEffect
-      motionProps={{
+      animationProps={{
         initial: { transform: 'translateY(100%)' },
         animate: {
           transform: 'translateY(0%)',
@@ -29,13 +29,14 @@ export default function ContactForm({ handleClose, containerClass, isShowAboutCo
           }
         }
       }}
-      elementClass={cn(
+      className={cn(
         'w-full lg:w-1/2 h-full bg-light_navy overflow-hidden px-4 lg:px-8 xl:px-16 py-20',
         containerClass,
         {
           'hidden lg:block': isShowAboutContact === EAboutContact.ABOUT
         }
       )}
+      forceAnimate={true}
     >
       <HiOutlineXMark onClick={handleClose} className='text-main_green absolute top-8 right-8 w-8 h-8 cursor-pointer' />
       <div className='absolute left-[10%] text-[100px] lg:text-[150px] xl:text-[190px] bottom-0 font-league_spartan font-bold opacity-20 text-white'>
@@ -49,21 +50,19 @@ export default function ContactForm({ handleClose, containerClass, isShowAboutCo
           <Input label='Email' id='floating_email' />
           <Textarea label='Description' id='floating_description' />
           <ElementEffect
-            motionProps={{
+            animationProps={{
               initial: { opacity: 1 },
               whileHover: 'hover'
             }}
-            elementType='button'
-            elementClass={
-              'px-4 py-2 rounded-sm border border-main_green text-main_green relative font-fira_mono hover:text-black w-max mt-4'
+            className={
+              'px-4 py-2 rounded-sm border border-main_green text-main_green relative font-fira_mono hover:text-black w-max mt-4 cursor-pointer'
             }
-            onClick={(e) => e.preventDefault()}
           >
             <ElementEffect
-              motionProps={{
+              animationProps={{
                 variants: buttonVariants
               }}
-              elementClass='absolute left-0 top-0 w-0 h-full bg-main_green z-[-1]'
+              className='absolute left-0 top-0 w-0 h-full bg-main_green z-[-1]'
             ></ElementEffect>
             Send Message
           </ElementEffect>

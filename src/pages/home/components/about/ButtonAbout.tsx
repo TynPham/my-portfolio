@@ -8,32 +8,33 @@ export interface ButtonAboutProps {}
 export default function ButtonAbout(props: ButtonAboutProps) {
   const { isShowAboutContact, setIsShowAboutContact } = useContext<AppContextType>(AppContext)
   const handleShow = (showType: EAboutContact) => {
+    document.body.style.overflow = 'hidden'
     setIsShowAboutContact(showType)
   }
   return (
     <div onClick={() => handleShow(EAboutContact.ABOUT)} aria-hidden='true'>
       <ElementEffect
-        motionProps={{
+        animationProps={{
           initial: { opacity: 1 },
           whileHover: !isShowAboutContact ? 'hover' : {}
         }}
-        elementType='button'
-        elementClass={cn('px-4 py-2 rounded-sm border border-main_green text-main_green relative font-fira_mono', {
+        ElementType='button'
+        className={cn('px-4 py-2 rounded-sm border border-main_green text-main_green relative font-fira_mono', {
           'hover:text-black': !isShowAboutContact
         })}
       >
         <ElementEffect
-          motionProps={{
+          animationProps={{
             variants: buttonVariants
           }}
-          elementClass='absolute left-0 top-0 w-0 h-full bg-main_green z-[-1]'
+          className='absolute left-0 top-0 w-0 h-full bg-main_green z-[-1]'
         ></ElementEffect>
         About Me
         <ElementEffect
-          motionProps={{
+          animationProps={{
             variants: arrowVariants
           }}
-          elementClass='absolute top-1/2 -right-6 -translate-y-1/2'
+          className='absolute top-1/2 -right-6 -translate-y-1/2'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'

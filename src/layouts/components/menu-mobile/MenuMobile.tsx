@@ -1,7 +1,7 @@
 import { memo, useContext } from 'react'
 import { EASE_VARIANTS, drawerItemVars } from 'src/constants/animations'
 import { AppContext, AppContextType } from 'src/contexts/app.context'
-import { headerNavDummy, socialLinks } from 'src/data/common.dummy'
+import { headerNavDummy, socialLinks } from 'src/data/common'
 import { AnimatePresence } from 'framer-motion'
 import ElementEffect from 'src/components/effect/ElementEffect'
 import { HashLink } from 'react-router-hash-link'
@@ -18,30 +18,30 @@ const MenuMobile = memo(function MenuMobileInner() {
       <AnimatePresence>
         {isOpenMenuMobile && (
           <ElementEffect
-            motionProps={{
+            animationProps={{
               initial: { opacity: 1 },
               animate: { opacity: 0.7 },
               exit: { opacity: 0, transition: { delay: 0.4 } }
             }}
-            elementClass='fixed inset-0 bg-main_green z-10'
+            className='fixed inset-0 bg-main_green z-10'
           ></ElementEffect>
         )}
       </AnimatePresence>
       <AnimatePresence>
         {isOpenMenuMobile && (
           <ElementEffect
-            motionProps={{
+            animationProps={{
               initial: { width: 0 },
               animate: { width: '80%', transition: { duration: 0.4 } },
               exit: { width: 0, transition: { delay: 0.4 } }
             }}
-            elementClass='fixed top-0 right-0 h-full bg-navy z-20'
+            className='fixed top-0 right-0 h-full bg-navy z-20'
           >
             <div className='flex flex-col gap-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
               {headerNavDummy.map((nav, itemIdx) => (
                 <ElementEffect
                   key={nav.id}
-                  motionProps={{
+                  animationProps={{
                     variants: drawerItemVars,
                     initial: 'initial',
                     animate: {
@@ -73,7 +73,7 @@ const MenuMobile = memo(function MenuMobileInner() {
                 return (
                   <ElementEffect
                     key={itemIdx}
-                    motionProps={{
+                    animationProps={{
                       variants: drawerItemVars,
                       initial: 'initial',
                       animate: {

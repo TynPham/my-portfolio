@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'motion/react'
 import { Fragment, memo, useContext } from 'react'
 import { AppContext, AppContextType } from 'src/contexts/app.context'
 import AboutInfor from './AboutInfor'
@@ -12,6 +12,7 @@ const AboutContact = memo(function AboutContactInner(props: AboutContactProps) {
 
   const handleClose = () => {
     setIsShowAboutContact(null)
+    document.body.style.overflow = 'auto'
   }
 
   return (

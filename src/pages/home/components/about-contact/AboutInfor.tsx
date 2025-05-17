@@ -4,7 +4,7 @@ import { HiOutlineXMark } from 'react-icons/hi2'
 import ElementEffect from 'src/components/effect/ElementEffect'
 import { EASE_ABOUT_CONTACT_VARIANTS } from 'src/constants/animations'
 import { EAboutContact } from 'src/contexts/app.context'
-import { currentTechs } from 'src/data/common.dummy'
+import { currentTechs } from 'src/data/common'
 import { cn } from 'src/utils/utils'
 
 export interface AboutInforProps {
@@ -16,7 +16,7 @@ export interface AboutInforProps {
 export default function AboutInfor({ handleClose, containerClass, isShowAboutContact }: AboutInforProps) {
   return (
     <ElementEffect
-      motionProps={{
+      animationProps={{
         initial: { transform: 'translateY(-100%)' },
         animate: {
           transform: 'translateY(0%)',
@@ -29,13 +29,14 @@ export default function AboutInfor({ handleClose, containerClass, isShowAboutCon
           }
         }
       }}
-      elementClass={cn(
-        'w-full lg:w-1/2 h-full bg-white overflow-hidden px-8 sm:px-4 md:px-32 lg:px-16 py-40 lg:py-20',
+      className={cn(
+        'w-full lg:w-1/2 h-full bg-white overflow-hidden px-8 md:px-32 lg:px-16 pb-8 lg:pb-20 pt-20',
         containerClass,
         {
           'hidden lg:block': isShowAboutContact === EAboutContact.CONTACT
         }
       )}
+      forceAnimate={true}
     >
       <HiOutlineXMark
         onClick={handleClose}
@@ -46,27 +47,32 @@ export default function AboutInfor({ handleClose, containerClass, isShowAboutCon
       </div>
       <div className='flex flex-col h-full justify-between text-black text-base xl:text-lg'>
         <h3 className='font-bold text-2xl'>About Me.</h3>
-        <span className='text-sm'>Front-end developer</span>
-        <div className='mt-4 flex flex-col gap-2'>
+        <span className='text-sm'>Full-stack Web Developer</span>
+        <div className='mt-4 flex flex-col gap-2 overflow-y-auto max-h-[500px] border-y-2 border-main_green py-4 scrollbar-none'>
           <p>
-            I'm Pham Tuyen, a 21-year-old Vietnamese
-            <span className='text-main_green'> Front-end developer</span>. I'm a person with a great passion for
-            computers and programming.
+            I'm Pham Tuyen, a passionate <span className='text-main_green font-medium'>Full-stack Web Developer</span>{' '}
+            with expertise in both frontend and backend development. I specialize in creating modern, responsive web
+            applications using React.js and Next.js for the frontend and Node.js with Express.js for the backend.
           </p>
           <p>
-            I like to create smart user interface and imagine useful interaction, developing rich
-            <span className='text-main_green'> web experiences</span> &
-            <span className='text-main_green'> web applications</span>.
+            My focus is on building <span className='text-main_green font-medium'>scalable applications</span> with
+            clean code architecture and optimal user experiences. I enjoy solving complex problems and turning ideas
+            into reality through elegant code solutions.
+          </p>
+          <p>
+            When I'm not coding, I'm constantly learning new technologies and best practices to stay at the forefront of
+            web development. I believe in writing maintainable code and creating applications that are both performant
+            and user-friendly.
           </p>
         </div>
-        <h4>Here are a few technologies I’ve been working with recently:</h4>
+        <h4 className='mt-4 font-medium'>Here are a few technologies I've been working with recently:</h4>
         <div className='flex items-center justify-between gap-2 mt-8 flex-wrap'>
           {currentTechs.map((tech, index) => {
             const Icon = tech.icon
             return (
-              <article key={index} className='group flex flex-col items-center gap-2 relative'>
-                <Icon className='w-14 xl:w-[4.5rem] h-14 xl:h-[4.5rem] group-hover:text-main_green transition-all' />
-                <p className='absolute text-sm opacity-0 -bottom-12 transition-all group-hover:opacity-100 group-hover:-bottom-8 duration-500'>
+              <article key={index} className='group flex flex-col items-center gap-2 relative cursor-pointer'>
+                <Icon className='size-8 md:size-10 lg:size-14 group-hover:text-main_green transition-all' />
+                <p className='absolute text-xs lg:text-sm opacity-0 -bottom-12 transition-all group-hover:opacity-100 group-hover:-bottom-4  lg:group-hover:-bottom-8 duration-500'>
                   {tech.name}
                 </p>
               </article>

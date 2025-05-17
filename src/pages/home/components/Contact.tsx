@@ -1,5 +1,4 @@
 import ElementEffect from 'src/components/effect/ElementEffect'
-import ElementEffectEntering from 'src/components/effect/ElementEffectEntering'
 import { useContext } from 'react'
 import { AppContext, AppContextType, EAboutContact } from 'src/contexts/app.context'
 import { EASE_ENTERING_VARIANTS, buttonVariants } from 'src/constants/animations'
@@ -13,13 +12,13 @@ export default function Contact(props: ContactProps) {
   }
   return (
     <section id='contact' className='min-h-screen'>
-      <ElementEffectEntering
-        motionProps={{
-          initial: { y: 50 },
-          animate: { y: 0 },
-          transition: { duration: 0.75, ease: EASE_ENTERING_VARIANTS, delay: 0.1 }
+      <ElementEffect
+        animationProps={{
+          initial: { y: 50, opacity: 0 },
+          animate: { y: 0, opacity: 1 },
+          transition: { duration: 0.75, ease: EASE_ENTERING_VARIANTS }
         }}
-        elementClass='font-fira_mono flex flex-col gap-5 md:gap-32 min-h-screen justify-center xl:ml-32'
+        className='font-fira_mono flex flex-col gap-5 md:gap-32 min-h-screen justify-center xl:ml-32'
       >
         <h2 className='mx-auto w-max text-xl md:text-3xl text-lightest_slate relative after:content-[""] after:block after:absolute after:-bottom-4 after:left-0 after:w-full after:bg-main_green after:h-[0.5px] font-medium'>
           <span className='text-main_green text-lg md:text-2xl'>04.</span> Contact with me
@@ -30,27 +29,27 @@ export default function Contact(props: ContactProps) {
             Although I’m not currently looking for any new opportunities, my inbox is always open. Whether you have a
             question or just want to say hi, I’ll try my best to get back to you!
           </p>
-          <ElementEffect
-            motionProps={{
-              initial: { opacity: 1 },
-              whileHover: 'hover'
-            }}
-            elementType='button'
-            elementClass={
-              'px-6 py-3 rounded-sm border border-main_green text-main_green relative font-fira_mono hover:text-black w-max mt-16'
-            }
-            onClick={() => handleShow(EAboutContact.CONTACT)}
-          >
+          <button onClick={() => handleShow(EAboutContact.CONTACT)}>
             <ElementEffect
-              motionProps={{
-                variants: buttonVariants
+              animationProps={{
+                initial: { opacity: 1 },
+                whileHover: 'hover'
               }}
-              elementClass='absolute left-0 top-0 w-0 h-full bg-main_green z-[-1]'
-            ></ElementEffect>
-            Say hello
-          </ElementEffect>
+              className={
+                'px-6 py-3 rounded-sm border border-main_green text-main_green relative font-fira_mono hover:text-black w-max mt-16'
+              }
+            >
+              <ElementEffect
+                animationProps={{
+                  variants: buttonVariants
+                }}
+                className='absolute left-0 top-0 w-0 h-full bg-main_green z-[-1]'
+              ></ElementEffect>
+              Say hello
+            </ElementEffect>
+          </button>
         </div>
-      </ElementEffectEntering>
+      </ElementEffect>
     </section>
   )
 }

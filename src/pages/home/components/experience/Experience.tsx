@@ -1,24 +1,31 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
-import { memo, useState } from 'react'
-import ElementEffectEntering from 'src/components/effect/ElementEffectEntering'
-import { experiencesDummy } from 'src/data/experiences.dummy'
+import { memo, useCallback, useMemo, useState } from 'react'
+import ElementEffect from 'src/components/effect/ElementEffect'
+import { experiencesDummy } from 'src/data/experiences'
 import { cn } from 'src/utils/utils'
-import parse from 'html-react-parser'
-import { EASE_ENTERING_VARIANTS } from 'src/constants/animations'
+import { EXPERIENCE_ANIMATION, TAB_INDICATOR_ANIMATION } from 'src/constants/experience'
+import TabContent from './components/TabContent'
 
 export interface ExperienceProps {}
 
 const Experience = memo(function ExperienceInner(props: ExperienceProps) {
   const [activeTab, setActiveTab] = useState<number>(1)
+
+  const handleTabChange = useCallback((index: number) => {
+    setActiveTab(index + 1)
+  }, [])
+
+  const tabContent = useMemo(() => {
+    return experiencesDummy.map((experience, index) => (
+      <TabContent key={index} experience={experience} index={index} isActive={activeTab === index + 1} />
+    ))
+  }, [activeTab])
+
   return (
-    <section id='experiences' className='min-h-screen pt-8'>
-      <ElementEffectEntering
-        motionProps={{
-          initial: { y: 50 },
-          animate: { y: 0 },
-          transition: { duration: 0.75, ease: EASE_ENTERING_VARIANTS, delay: 0.1 }
-        }}
-        elementClass='font-fira_mono flex flex-col xl:ml-32 gap-5 md:gap-10 justify-center'
+    <section id='experiences' className='pt-8'>
+      <ElementEffect
+        animationProps={EXPERIENCE_ANIMATION}
+        className='font-fira_mono flex flex-col xl:ml-32 gap-5 md:gap-10 justify-center'
       >
         <h2 className='w-max text-xl md:text-3xl text-lightest_slate relative after:content-none after:md:content-[""] after:block after:absolute after:top-1/2 after:-translate-y-1/2 after:left-[105%] after:w-[20vw] after:bg-main_green after:h-[0.5px] font-medium'>
           <span className='text-main_green text-lg md:text-2xl'>02.</span> Experiences
@@ -40,51 +47,23 @@ const Experience = memo(function ExperienceInner(props: ExperienceProps) {
                   data-hs-tab={`#vertical-tab-with-border-${index + 1}`}
                   aria-controls={`vertical-tab-with-border${index + 1}`}
                   role='tab'
-                  onClick={() => setActiveTab(index + 1)}
+                  onClick={() => handleTabChange(index)}
                 >
                   {experience.workName}
                 </button>
               ))}
             </nav>
             <div
-              className={cn('absolute w-[2px] h-1/2 bg-main_green -left-[2px] top-1/3 transition-all duration-300', {
-                'top-0': activeTab === 1,
-                'top-1/2': activeTab === 2
-              })}
-            ></div>
+              className={cn(
+                'absolute w-[2px] h-1/3 bg-main_green -left-[2px] transition-all',
+                TAB_INDICATOR_ANIMATION.positions[activeTab as keyof typeof TAB_INDICATOR_ANIMATION.positions]
+              )}
+              style={{ transitionDuration: `${TAB_INDICATOR_ANIMATION.duration}ms` }}
+            />
           </div>
-          <div className='ms-3 flex-1'>
-            {experiencesDummy.map((experience, index) => (
-              <div
-                key={index}
-                id={`vertical-tab-with-border-${index + 1}`}
-                role='tabpanel'
-                aria-labelledby={`vertical-tab-with-border-item-${index + 1}`}
-                className={cn('mt-1', { hidden: activeTab !== index + 1 })}
-              >
-                <div className='flex flex-col gap-8'>
-                  <article className='flex flex-col gap-2'>
-                    <h3 className='text-lightest_slate font-medium text-lg'>
-                      {experience.position.name}{' '}
-                      {experience.position.company && (
-                        <span className='text-main_green'>{experience.position.company}</span>
-                      )}
-                    </h3>
-                    <span className='text-sm'>{experience.position.time}</span>
-                  </article>
-                  <ul className="list-['▸'] marker:text-main_green ml-3 flex flex-col gap-6 text-sm max-w-[600px]">
-                    {experience.content.map((content, idx) => (
-                      <li className='pl-4' key={idx}>
-                        {parse(content)}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
+          <div className='ms-3 flex-1'>{tabContent}</div>
         </div>
-      </ElementEffectEntering>
+      </ElementEffect>
     </section>
   )
 })

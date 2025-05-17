@@ -11,10 +11,13 @@ const SideElement = memo(
   function SideElement({ children, containerClass }: SideElementProps) {
     return (
       <ElementEffect
-        motionProps={{
+        animationProps={{
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
           transition: { delay: 2.5 }
         }}
-        elementClass={cn(
+        forceAnimate={true}
+        className={cn(
           'hidden md:flex flex-col items-center gap-9 w-10 fixed bottom-0 left-10 right-auto z-10 text-light_slate after:content-[""] after:block after:w-[1px] after:h-[90px] after:bg-light_slate after:mx-auto after:my-0',
           containerClass
         )}

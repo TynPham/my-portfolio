@@ -51,52 +51,52 @@ jobs:
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Executing remote ssh commands using password
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            cd ~/my-portfolio
-            git fetch --all
-            git reset --hard origin/main
-            echo "${{secrets.ENV_PRODUCTION}}" > .env
-            npm i --force
-            npm run build
-            pm2 restart my-portfolio
-      - name: Deploy successfully after deploy
-        if: success()
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ✅ Deploy successfully after deploy
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Executing remote ssh commands using password
+  #       uses: appleboy/ssh-action@v1.2.0
+  #       with:
+  #         host: ${{ secrets.SSH_HOST }}
+  #         username: ${{ secrets.SSH_USERNAME }}
+  #         password: ${{ secrets.SSH_PASSWORD }}
+  #         port: ${{ secrets.SSH_PORT }}
+  #         script: |
+  #           export NVM_DIR=~/.nvm
+  #           source ~/.nvm/nvm.sh
+  #           cd ~/my-portfolio
+  #           git fetch --all
+  #           git reset --hard origin/main
+  #           echo "${{secrets.ENV_PRODUCTION}}" > .env
+  #           npm i --force
+  #           npm run build
+  #           pm2 restart my-portfolio
+  #     - name: Deploy successfully after deploy
+  #       if: success()
+  #       uses: appleboy/telegram-action@master
+  #       with:
+  #         to: ${{ secrets.TELEGRAM_TO }}
+  #         token: ${{ secrets.TELEGRAM_TOKEN }}
+  #         message: |
+  #           ✅ Deploy successfully after deploy
+  #           ${{ github.actor }} created commit:
+  #           Commit message: ${{ github.event.commits[0].message }}
 
-            Repository: ${{ github.repository }}
+  #           Repository: ${{ github.repository }}
 
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-      - name: Deploy failed after deploy
-        if: failure()
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ❌ Deploy failed after deploy
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
+  #           See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+  #     - name: Deploy failed after deploy
+  #       if: failure()
+  #       uses: appleboy/telegram-action@master
+  #       with:
+  #         to: ${{ secrets.TELEGRAM_TO }}
+  #         token: ${{ secrets.TELEGRAM_TOKEN }}
+  #         message: |
+  #           ❌ Deploy failed after deploy
+  #           ${{ github.actor }} created commit:
+  #           Commit message: ${{ github.event.commits[0].message }}
 
-            Repository: ${{ github.repository }}
+  #           Repository: ${{ github.repository }}
 
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+  #           See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
